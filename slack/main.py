@@ -42,11 +42,26 @@ def send_channel_message(channel_id, message):
     except SlackApiError as e:
         print(f"Error sending message to channel: {e.response['error']}")
 
+
+def upload_file_to_channel(channel_id, file_path, title):
+    """Upload a file to a Slack channel."""
+    client = WebClient(token=SLACK_BOT_TOKEN)
+    try:
+        response = client.files_upload_v2(
+            channels=[channel_id],  # Channel ID to upload the file
+            file=file_path,
+            title=title
+        )
+        print(f"File uploaded successfully: {response['file']['id']}")
+    except SlackApiError as e:
+        print(f"Error uploading file: {e.response['error']}")
+        
 if __name__ == "__main__":
     while True:
         print("Select an option:")
         print("1: Send a DM to a user")
         print("2: Send a message to a channel")
+        print("3: Upload a file to a channel")
         print("Other: Exit")
 
         choice = input("Enter your choice: ")
@@ -61,6 +76,11 @@ if __name__ == "__main__":
             channel_id = CHANNEL
             channel_message = input("Enter the message to send: ")
             send_channel_message(channel_id, channel_message)
+        elif choice == "3":
+            channel_id = CHANNEL
+            file_path = input("Enter the file path to upload: ")
+            title = input("Enter the file title: ")
+            upload_file_to_channel(channel_id, file_path, title)
         else:
             print("Exiting...")
             break
