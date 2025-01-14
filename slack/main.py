@@ -12,11 +12,11 @@ SLACK_BOT_TOKEN = os.getenv('SLACK_BOT_TOEKN')
 YEWON = os.getenv('YEWON')
 CHANNEL = os.getenv('CHANNEL')
 
-print("변수 확인 시작")
-print(SLACK_BOT_TOKEN)
-print(YEWON)
-print(CHANNEL)
-print("변수 확인 끝")
+# print("변수 확인 시작")
+# print(SLACK_BOT_TOKEN)
+# print(YEWON)
+# print(CHANNEL)
+# print("변수 확인 끝")
 
 def send_dm(user_id, message):
     """Send a direct message (DM) to a Slack user."""
